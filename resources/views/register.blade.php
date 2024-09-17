@@ -6,9 +6,15 @@
     <title>Register</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Toastr CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href=" {{asset('AdminLTE-3/plugins/fontawesome-free/css/all.min.css')}}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href=" {{asset('AdminLTE-3/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href=" {{asset('AdminLTE-3/plugins/toastr/toastr.min.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href=" {{asset('AdminLTE-3/dist/css/adminlte.min.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <style>
         body {
             background-image: url('{{ asset('images/background.jpg') }}');
@@ -58,6 +64,7 @@
             font-weight: bold;
             color: #CF434E;
             margin-bottom: 2rem;
+            font-size: 30px;
         }
 
         .form-group label {
@@ -78,21 +85,30 @@
 
         .form-footer a:hover {
             text-decoration: underline;
+            color: #e74832 !important;
         }
 
-        /* Custom Toastr CSS */
-        .toast-error {
-            background-color: #e74832 !important;
-            color: #ffffff !important;
+        .custom-swal-popup {
+            background-color: #FDDAA0 !important; /* Warna merah */
+            color: white !important; /* Warna teks menjadi putih */
         }
 
-        .toast-success {
-            background-color: #28a745 !important;
-            color: #ffffff !important;
+        .custom-swal-confirm-button {
+            background-color: #e74832 !important; /* Warna latar belakang tombol konfirmasi */
+            border:#e74832 !important; /* Hapus border default tombol konfirmasi */
+            border-radius: 0.5rem !important; /* Radius sudut tombol konfirmasi */
+            padding: 0.75rem 1.5rem !important; /* Padding tombol konfirmasi */
+         }
+
+        .custom-swal-confirm-button:hover {
+            background-color: #e87565 !important; /* Warna latar belakang tombol saat hover */
+            color: #ffffff !important; /* Warna teks tombol saat hover */
+            border: #e74832 !important;
         }
+
+
     </style>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
 
@@ -111,11 +127,11 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Confirm Password</label>
-                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm Password">
+                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm password">
             </div>
             <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
             <div class="form-footer">
@@ -125,31 +141,55 @@
     </div>
 </div>
 
-<!-- jQuery (full version) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Popper.js, Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="{{asset('AdminLTE-3/plugins/jquery/jquery.min.js')}} "></script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('AdminLTE-3/plugins/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
+<!-- SweetAlert2 -->
+<script src="{{asset('AdminLTE-3/plugins/sweetalert2/sweetalert2.min.js')}} "></script>
+<!-- Toastr -->
+<script src="{{asset('AdminLTE-3/plugins/toastr/toastr.min.js')}} "></script>
 
-<!-- Toastr Notifications -->
 <script>
     $(document).ready(function() {
-        // Error Notification
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                toastr.error("{{ $error }}")
-            @endforeach
-        @endif
+        // SweetAlert2 Notification based on errors or success
         
-        // Success Notification
+        // Error Notification using SweetAlert2
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                showConfirmButton: true,
+                customClass: {
+                 popup: 'custom-swal-popup',
+                 confirmButton: 'custom-swal-confirm-button', 
+              },
+            });
+        @endif
+
+        // Success Notification using SweetAlert2
         @if (session('status'))
-            toastr.success("{{ session('message') }}")
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('message') }}',
+                showConfirmButton: true,
+                customClass: {
+                 popup: 'custom-swal-popup',
+                 confirmButton: 'custom-swal-confirm-button', 
+              },
+            });
         @endif
     });
 </script>
+
+
 
 </body>
 </html>

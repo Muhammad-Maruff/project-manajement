@@ -95,7 +95,7 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter password">
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
             <div class="form-footer">
                 <p>Don't have an account? <a href="register">Register</a></p>
                 <p><a href="#">Forgot your password?</a></p>
