@@ -50,8 +50,8 @@
         }
 
         .card-title {
-            font-weight: 500;
-            color: #333;
+            font-weight: bold;
+            color: #CF434E;
             margin-bottom: 2rem;
         }
 
@@ -93,11 +93,11 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
+                <input type="password" class="form-control" id="password" placeholder="Enter password">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
             <div class="form-footer">
-                <p>Don't have an account? <a href="#">Sign up</a></p>
+                <p>Don't have an account? <a href="register">Register</a></p>
                 <p><a href="#">Forgot your password?</a></p>
             </div>
         </form>
