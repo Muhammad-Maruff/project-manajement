@@ -6,6 +6,9 @@
     <title>Register</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
     <style>
         body {
             background-image: url('{{ asset('images/background.jpg') }}');
@@ -15,13 +18,6 @@
             background-size: cover;
             font-family: 'Poppins', sans-serif;
         }
-
-        .notif{
-            position: absolute;
-            margin-left: 20px;
-            margin-top: 20px;
-            z-index: 999999999999;
-      }
 
         .container {
             min-height: 100vh;
@@ -69,11 +65,6 @@
             color: #666;
         }
 
-        .form-text {
-            font-size: 0.85rem;
-            color: #999;
-        }
-
         .form-footer {
             margin-top: 1.5rem;
             text-align: center;
@@ -88,26 +79,23 @@
         .form-footer a:hover {
             text-decoration: underline;
         }
+
+        /* Custom Toastr CSS */
+        .toast-error {
+            background-color: #e74832 !important;
+            color: #ffffff !important;
+        }
+
+        .toast-success {
+            background-color: #28a745 !important;
+            color: #ffffff !important;
+        }
     </style>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-    <div class="notif">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-          @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-          @endforeach
-        </div>
-        @endif
-  
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
-  
-      </div>
+
 <div class="container">
     <div class="card">
         <h2 class="card-title text-center">Register</h2>
@@ -137,12 +125,31 @@
     </div>
 </div>
 
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- jQuery (full version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- Popper.js, Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<!-- Toastr Notifications -->
+<script>
+    $(document).ready(function() {
+        // Error Notification
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
+            @endforeach
+        @endif
+        
+        // Success Notification
+        @if (session('status'))
+            toastr.success("{{ session('message') }}")
+        @endif
+    });
+</script>
+
 </body>
 </html>
