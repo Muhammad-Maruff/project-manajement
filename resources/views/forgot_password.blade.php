@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Forgot Password</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
      <!-- Font Awesome -->
@@ -113,21 +113,16 @@
 <body>
     <div class="container">
      <div class="card">
-        <h2 class="card-title text-center">Login</h2>
-        <form action="login" method="POST">
+        <h2 class="card-title text-center">Forgot Password</h2>
+        <form action="" method="POST">
             @csrf
             <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" autocomplete="off">
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+            <button type="submit" class="btn btn-primary btn-block">RESET PASSWORD</button>
             <div class="form-footer">
-                <p>Don't have an account? <a href="register">Register</a></p>
-                <p><a href="forgotPassword">Forgot your password?</a></p>
+                <p>Have an account? <a href="login">Login</a></p>
             </div>
         </form>
     </div>
@@ -145,24 +140,5 @@
 <!-- Toastr -->
 <script src="{{asset('AdminLTE-3/plugins/toastr/toastr.min.js')}} "></script>
 
-<script>
-    $(document).ready(function() {
-        // SweetAlert2 Notification based on errors or success
-
-        // Error Notification using SweetAlert2
-        @if (session('status'))
-        Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: '{{ session('message') }}',
-                showConfirmButton: true,
-                customClass: {
-                 popup: 'custom-swal-popup',
-                 confirmButton: 'custom-swal-confirm-button', 
-              },
-            });
-        @endif
-    });
-</script>
 </body>
 </html>
