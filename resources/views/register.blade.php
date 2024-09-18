@@ -105,17 +105,16 @@
             color: #ffffff !important; /* Warna teks tombol saat hover */
             border: #e74832 !important;
         }
-
-
     </style>
-
+    
 </head>
+
 <body>
 
 <div class="container">
     <div class="card">
         <h2 class="card-title text-center">Register</h2>
-        <form action="" method="POST">
+        <form action="register" method="POST">
             @csrf
             <div class="form-group">
                 <label for="username">Username</label>
@@ -188,8 +187,6 @@
         @endif
     });
 </script>
-
-
 
 </body>
 </html>
