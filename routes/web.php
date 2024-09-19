@@ -32,4 +32,10 @@ Route::get('logout', [AuthController::class, 'logout']);
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'registerProcess']);
 
-Route::get('forgotPassword', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+Route::get('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
+Route::post('forgot-password', [AuthController::class, 'forgotPasswordProcess']);
+
+Route::get('validate-forgot-password/{token}', [AuthController::class, 'validateForgotPassword'])->name('validate-forgot-password');
+Route::post('validate-forgot-password', [AuthController::class, 'validateForgotPasswordProcess']);
+
+Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');

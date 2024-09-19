@@ -127,7 +127,7 @@
             <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
             <div class="form-footer">
                 <p>Don't have an account? <a href="register">Register</a></p>
-                <p><a href="forgotPassword">Forgot your password?</a></p>
+                <p><a href="forgot-password">Forgot your password?</a></p>
             </div>
         </form>
     </div>

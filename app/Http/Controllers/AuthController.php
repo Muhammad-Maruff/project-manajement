@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\PasswordReset;
+use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -74,6 +78,42 @@ class AuthController extends Controller
         Session::flash('status', 'success');
         Session::flash('message', 'Register successfully, waiting admin for approval!');
         return redirect('register');
+    }
+
+    public function forgotPassword() {
+        return view ('forgot_password');
+    }
+
+    public function forgotPasswordProcess(Request $request) {
+        $customMessage = [
+            'email.exists' => 'Email not registered !'
+        ];
+
+        $request->validate([
+            'email' => 'required|email|exists:users,email'  // Fix typo: change 'exist' to 'exists'
+        ], $customMessage);
+
+        $token = Str::random(60);
+
+        PasswordReset::create([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => now()
+        ]);
+
+        Mail::to($request->email)->send(new ResetPasswordMail($token));
+    
+        // Simulate sending email process (you can replace this with actual email sending logic)
+    
+        return redirect()->route('forgot-password')->with([
+            'status' => 'success',
+            'message' => 'Password reset link has been sent !'
+        ]);
+    }
+    
+
+    public function resetPassword () {
+        return view ('reset_password');
     }
 
     public function logout(Request $request) {

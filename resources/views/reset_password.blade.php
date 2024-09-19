@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
+    <title>Reset Password</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
      <!-- Font Awesome -->
@@ -113,14 +113,18 @@
 <body>
     <div class="container">
      <div class="card">
-        <h2 class="card-title text-center">Forgot Password</h2>
-        <form action="forgot-password" method="POST">
+        <h2 class="card-title text-center">Reset Password</h2>
+        <form action="" method="POST">
             @csrf
             <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" autocomplete="off">
+                <label for="password">New Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
             </div>
-            <button type="submit" class="btn btn-primary btn-block">SEND EMAIL</button>
+            <div class="form-group">
+                <label for="password_confirmation">Confirm Password</label>
+                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">RESET PASSWORD</button>
             <div class="form-footer">
                 <p>Have an account? <a href="login">Login</a></p>
             </div>
@@ -139,40 +143,6 @@
 <script src="{{asset('AdminLTE-3/plugins/sweetalert2/sweetalert2.min.js')}} "></script>
 <!-- Toastr -->
 <script src="{{asset('AdminLTE-3/plugins/toastr/toastr.min.js')}} "></script>
-
-<script>
-    $(document).ready(function() {
-        // SweetAlert2 Notification based on errors or success
-        
-        // Error Notification using SweetAlert2
-        @if ($errors->any())
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: '<ul>@foreach ($errors->all() as $error){{ $error }}@endforeach</ul>',
-                showConfirmButton: true,
-                customClass: {
-                    popup: 'custom-swal-popup',
-                    confirmButton: 'custom-swal-confirm-button', 
-                },
-            });
-        @endif
-
-        // Success Notification using SweetAlert2
-        @if (session('status') === 'success')
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: '{{ session('message') }}',
-                showConfirmButton: true,
-                customClass: {
-                    popup: 'custom-swal-popup',
-                    confirmButton: 'custom-swal-confirm-button', 
-                },
-            });
-        @endif
-    });
-</script>
 
 </body>
 </html>

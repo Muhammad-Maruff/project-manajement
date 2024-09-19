@@ -113,18 +113,11 @@
 <body>
     <div class="container">
      <div class="card">
-        <h2 class="card-title text-center">Forgot Password</h2>
-        <form action="forgot-password" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" autocomplete="off">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">SEND EMAIL</button>
+        <h2 class="card-title text-center">Reset your password by clicking the link below !</h2>
             <div class="form-footer">
-                <p>Have an account? <a href="login">Login</a></p>
+                <p><a href="{{route('validate-forgot-password', ['token' => $token])}}">Reset Password</a></p>
             </div>
-        </form>
+
     </div>
 </div>
 
@@ -139,40 +132,6 @@
 <script src="{{asset('AdminLTE-3/plugins/sweetalert2/sweetalert2.min.js')}} "></script>
 <!-- Toastr -->
 <script src="{{asset('AdminLTE-3/plugins/toastr/toastr.min.js')}} "></script>
-
-<script>
-    $(document).ready(function() {
-        // SweetAlert2 Notification based on errors or success
-        
-        // Error Notification using SweetAlert2
-        @if ($errors->any())
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: '<ul>@foreach ($errors->all() as $error){{ $error }}@endforeach</ul>',
-                showConfirmButton: true,
-                customClass: {
-                    popup: 'custom-swal-popup',
-                    confirmButton: 'custom-swal-confirm-button', 
-                },
-            });
-        @endif
-
-        // Success Notification using SweetAlert2
-        @if (session('status') === 'success')
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: '{{ session('message') }}',
-                showConfirmButton: true,
-                customClass: {
-                    popup: 'custom-swal-popup',
-                    confirmButton: 'custom-swal-confirm-button', 
-                },
-            });
-        @endif
-    });
-</script>
 
 </body>
 </html>
