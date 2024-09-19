@@ -110,7 +110,57 @@ class AuthController extends Controller
             'message' => 'Password reset link has been sent !'
         ]);
     }
+
+    public function validateForgotPassword(Request $request, $token) {
+        $getToken = PasswordReset::where('token', $token)->first();
+
+        if (!$getToken) {
+            return redirect()->route('login')->with('failed', 'invalid token');
+        }
+
+        return view ('reset_password', compact('token'));
+    }
+
+    public function validateForgotPasswordProcess(Request $request) {
+        $customMessage = [
+            'password.required' => 'Password cannot be empty!'
+        ];
     
+        $request->validate([
+            'password' => 'required|min:8|confirmed',
+        ], $customMessage);
+    
+        $token = PasswordReset::where('token', $request->token)->first();
+
+    
+        if (!$token) {
+            return redirect()->route('login')->with([
+                'status' => 'failed',
+                'message' => 'Invalid token!'
+            ]);
+        }
+    
+        $user = User::where('email', $token->email)->first();
+    
+        if (!$user) {
+            return redirect()->route('login')->with([
+                'status' => 'failed',
+                'message' => 'Email not registered!'
+            ]);
+        }
+    
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+    
+        $token->delete();
+    
+        return redirect()->route('login')->with([
+            'status' => 'success',
+            'message' => 'Reset Password Successfully!'
+        ]);
+    }
+     
 
     public function resetPassword () {
         return view ('reset_password');

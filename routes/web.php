@@ -19,9 +19,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::middleware('only_admin')->group(function() {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -36,6 +34,6 @@ Route::get('forgot-password', [AuthController::class, 'forgotPassword'])->name('
 Route::post('forgot-password', [AuthController::class, 'forgotPasswordProcess']);
 
 Route::get('validate-forgot-password/{token}', [AuthController::class, 'validateForgotPassword'])->name('validate-forgot-password');
-Route::post('validate-forgot-password', [AuthController::class, 'validateForgotPasswordProcess']);
+Route::post('validate-forgot-password-act', [AuthController::class, 'validateForgotPasswordProcess'])->name('validate-forgot-password-act');
 
 Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
