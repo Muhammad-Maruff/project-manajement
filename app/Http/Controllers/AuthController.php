@@ -56,6 +56,7 @@ class AuthController extends Controller
             //     return redirect ('profile');
             // }
         }
+        
         // jika username & password tidak sesuai 
         Session::flash('status', 'failed');
         Session::flash('message', 'Incorrect email or password !');
@@ -66,8 +67,12 @@ class AuthController extends Controller
         $validated = $request->validate([
             'username' => 'required|unique:users|max:255',
             'email' => 'required|unique:users|max:255|email',
-            'password' => 'required|min:8|confirmed', // Menambahkan konfirmasi password
+            'phone' => 'required|max:255',
+            'address' => 'required|max:255',
+            'password' => 'required|min:8|confirmed',
         ]);
+
+        // dd($validated);
 
         // Hash the password before saving
         $validated['password'] = Hash::make($validated['password']);

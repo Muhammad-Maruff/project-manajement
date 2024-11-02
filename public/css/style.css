@@ -1,0 +1,144 @@
+body {
+    background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    background-color: #FDDAA0;
+    width: 500px;
+}
+
+.container .card-login {
+    width: 500px;
+    height: 480px;
+}
+
+.container .card-register {
+    width: 600px;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.card .btn-primary {
+    background: #e74832;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background 0.3s ease;
+}
+
+.card .btn-primary:hover {
+    background: #F87563;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #CF434E;
+    margin-bottom: 2rem;
+    font-size: 30px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #666;
+}
+
+.form-text {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.form-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.form-footer a {
+    color: #e74832;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+    color: #e74832;
+}
+
+.navbar {
+    background-color: #FDDAA0 !important;
+}
+
+.main-header .navbar-nav .nav-link {
+    color: #605f5f;
+}
+
+
+.main-sidebar {
+    background-color: #F37866;
+}
+
+.main-sidebar nav ul li p {
+    color: #FFFFFF;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.nav-icon {
+    color: #FFFFFF;
+}
+
+.sidebar .info a{
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.sidebar .info p {
+    font-size: 12px;
+}
+
+.brand-text {
+    color: white;
+    font-weight: bold;
+}
+
+.sidebar-active {
+    background-color: #BC4A4A !important;
+}
+
+
+/* .custom-swal-popup {
+    background-color: #FDDAA0 !important;
+    color: white !important;
+}
+
+.custom-swal-confirm-button {
+    background-color: #e74832 !important;
+    border: #e74832 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem 1.5rem !important;
+}
+
+.custom-swal-confirm-button:hover {
+    background-color: #e87565 !important;
+    color: #ffffff !important;
+    border: #e74832 !important;
+} */
