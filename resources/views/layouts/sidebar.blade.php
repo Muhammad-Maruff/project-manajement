@@ -1,6 +1,5 @@
-  <style>
-      <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
   
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -15,7 +14,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('AdminLTE-3/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('images/profile.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ ucfirst(auth()->user()->username) }}</a>

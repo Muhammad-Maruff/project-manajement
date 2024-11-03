@@ -1,17 +1,18 @@
-body {
+body .container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+body.body-image {
     background-image: url('../images/background.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
     font-family: 'Poppins', sans-serif;
-}
-
-.container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container .card {
@@ -56,6 +57,28 @@ body {
     margin-bottom: 2rem;
     font-size: 30px;
 }
+
+.card-header .image img {
+    margin-left: 20px;
+}
+
+.card-information {
+    margin-bottom: 10px; /* Mengatur jarak di bawah section */
+}
+
+.card-information label {
+    display: block; /* Memastikan label berada di baris terpisah */
+    margin-bottom: 2px; /* Mengatur jarak antara label dan p */
+}
+
+.card-information p {
+    margin: 0; /* Menghapus margin default pada p */
+}
+
+.car .image-profile {
+    align-items: center;
+}
+
 
 .form-group label {
     font-weight: 500;
@@ -123,6 +146,42 @@ body {
 .sidebar-active {
     background-color: #BC4A4A !important;
 }
+
+ .image .profile-image {
+    width: 200px;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; 
+}
+
+.profile-card {
+    width: 350px;
+    margin: auto; /* Centring the card */
+    padding: 20px; /* Pastikan padding tidak terlalu besar */
+}
+
+.info-row {
+    display: flex; /* Menggunakan Flexbox */
+    align-items: center; /* Menyusun elemen secara vertikal */
+    justify-content: space-between; /* Memberikan ruang antar elemen */
+    margin-bottom: 10px; /* Jarak antar baris */
+}
+
+.info-item {
+    flex: 1; /* Memberikan ruang yang sama untuk setiap item */
+    display: flex;
+    flex-direction: column; /* Menyusun label dan p secara vertikal */
+}
+
+.info-item label {
+    margin-bottom: 2px; /* Mengatur jarak antara label dan paragraf */
+    font-weight: bold; /* Menebalkan teks label */
+}
+
 
 
 /* .custom-swal-popup {

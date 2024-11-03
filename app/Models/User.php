@@ -28,7 +28,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'password',
-        'status'
+        'status',
     ];
 
     /**
@@ -51,7 +51,8 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'role_id' => 2
+        'role_id' => 2,
+        'image' => 'images/profile.jpg'
     ];
 
     

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -37,3 +38,5 @@ Route::get('validate-forgot-password/{token}', [AuthController::class, 'validate
 Route::post('validate-forgot-password-act', [AuthController::class, 'validateForgotPasswordProcess'])->name('validate-forgot-password-act');
 
 Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
+
+Route::get('profile',  [ProfileController::class, 'index'])->name('profile');

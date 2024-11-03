@@ -52,9 +52,9 @@ class AuthController extends Controller
                 return redirect('dashboard');
             }
             // cek jika login sebagai client ke halaman profile
-            // if(Auth::user()->role_id == 2){
-            //     return redirect ('profile');
-            // }
+            if(Auth::user()->role_id == 2){
+                return redirect ('profile');
+            }
         }
         
         // jika username & password tidak sesuai 

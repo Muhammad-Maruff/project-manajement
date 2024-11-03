@@ -44,7 +44,7 @@
             <i class="fas fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item">
+            <a href="/profile" class="dropdown-item">
                 <i class="fas fa-user-circle mr-2"></i> Profile
             </a>
             <div class="dropdown-divider"></div>
