@@ -13,7 +13,7 @@
         <div class="card-header">
             <div class="user-panel mt-3 mb-3 d-flex">
                 <div class="image">
-                  <img src="{{ asset('images/profile.jpg') }}" class="img-circle profile-image" alt="User Image">
+                  <img src="{{ Auth()->user()->image != null ?  asset('storage/images/'.Auth()->user()->image) : asset('images/profile.jpg') }}" class="img-circle profile-image" alt="User Image">
                 </div>
             </div>
         </div>

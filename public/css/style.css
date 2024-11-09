@@ -59,11 +59,13 @@ body.body-image {
 }
 
 .profile-card {
-    width: 800px;
+    width: 700px;
     margin: auto; 
     padding: 20px; 
     position: relative;
     box-sizing: border-box;
+    border-radius: 20px;
+
 }
 
 .card-title {
@@ -82,8 +84,8 @@ body.body-image {
 .card .card-edit {
     color: black;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 30px;
+    right: 30px;
     font-size: 20px;
 }
 
@@ -179,10 +181,12 @@ body.body-image {
 .sidebar .info a{
     color: #FFFFFF;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .sidebar .info p {
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .brand-text {
