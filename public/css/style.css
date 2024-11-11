@@ -1,3 +1,19 @@
+::-webkit-scrollbar {
+    width: 10px; 
+    height: 10px; 
+}
+
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: #F37866; 
+    border-radius: 10px; 
+}
+
 body .container {
     min-height: 100vh;
     display: flex;
@@ -65,7 +81,12 @@ body.body-image {
     position: relative;
     box-sizing: border-box;
     border-radius: 20px;
+}
 
+.profile-card .editProfileButton {
+    height: 40px;
+    border: none;
+    background: none;
 }
 
 .card-title {
@@ -97,7 +118,6 @@ body.body-image {
     width: 200px;
 }
 
-
 .card-content {
     display: flex;
     justify-content: space-evenly;
@@ -128,6 +148,17 @@ body.body-image {
     font-size: 20px;
 }
 
+.checkIconContainer {
+    text-align: center;
+    margin-top: 5px;
+    background: none;
+    border: none;
+    display: none;
+}
+
+.fa-check:hover {
+    cursor: pointer;
+}
 
 .form-group label {
     font-weight: 500;
@@ -197,6 +228,10 @@ body.body-image {
 .sidebar-active {
     background-color: #BC4A4A !important;
 }
+
+
+
+
 
 
 

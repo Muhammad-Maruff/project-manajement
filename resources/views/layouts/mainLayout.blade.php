@@ -100,6 +100,7 @@
 <script src="{{asset('AdminLTE-3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('AdminLTE-3/dist/js/adminlte.js')}}"></script>
+<script src="{{asset('js/script.js')}}"></script>
 
 <script src="{{asset('AdminLTE-3/dist/js/pages/dashboard.js')}}"></script>
 </body>

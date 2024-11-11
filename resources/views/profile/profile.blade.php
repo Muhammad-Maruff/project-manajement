@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="style.css">
-
 @extends('layouts.mainLayout')
 @section('title','Profile')
 
@@ -7,9 +5,9 @@
 
 <div class="row profile-container">
     <div class="card profile-card">
-        <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon fa fa-edit card-edit"></i>
-          </a>
+            <button id="editProfileButton" class="editProfileButton">
+                <i class="nav-icon fa fa-edit card-edit" id="editButton"></i>
+            </button>
         <div class="card-header">
             <div class="user-panel mt-3 mb-3 d-flex">
                 <div class="image">
@@ -21,18 +19,28 @@
         <div class="card-content">
             <section class="content-one">
                 <label for="">Username</label>
-                <p>{{Auth()->user()->username}}</p>
+                <p id="usernameDisplay">{{   Auth()->user()->username    }}</p>
+                <input type="text" id="usernameInput" value="{{ Auth()->user()->username }}" style="display: none">
+
                 <label for="">Email</label>
-                <p>{{Auth()->user()->email}}</p>
+                <p id="emailDisplay">{{   Auth()->user()->email   }}</p>
+                <input type="text" id="emailInput" value="{{ Auth()->user()->email }}" style="display: none">
             </section>
+
             <section class="content-two">
                 <label for="">Phone</label>
-                <p>{{Auth()->user()->phone}}</p>
+                <p id="phoneDisplay">{{   Auth()->user()->phone   }}</p>
+                <input type="text" id="phoneInput" value="{{ Auth()->user()->phone }}" style="display: none">
+
                 <label for="">Address</label>
-                <p>{{Auth()->user()->address}}</p>
+                <p id="addressDisplay">{{   Auth()->user()->address     }}</p>
+                <input type="text" id="addressInput" value="{{ Auth()->user()->address}}" style="display: none">
             </section>
         </div>
           
+        <button class="checkIconContainer">
+            <i class="fa fa-check saveEditProfile"></i>
+        </button>
     </div>
 </div>
 
