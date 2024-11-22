@@ -40,3 +40,4 @@ Route::post('validate-forgot-password-act', [AuthController::class, 'validateFor
 Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 
 Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

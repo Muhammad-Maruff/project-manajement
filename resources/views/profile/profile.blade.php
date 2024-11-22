@@ -3,6 +3,7 @@
 
 @section('content')
 
+
 <div class="row profile-container">
     <div class="card profile-card">
             <button id="editProfileButton" class="editProfileButton">
@@ -37,10 +38,11 @@
                 <input type="text" id="addressInput" value="{{ Auth()->user()->address}}" style="display: none">
             </section>
         </div>
-          
+
         <button class="checkIconContainer">
-            <i class="fa fa-check saveEditProfile"></i>
+            <i class="fas fa-check-circle saveEditProfile"></i>
         </button>
+
     </div>
 </div>
 
