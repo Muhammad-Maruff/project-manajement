@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="asset('css/style.css')">
-
 @extends('layouts.mainLayout')
 @section('title','Dashboard')
 

@@ -1,19 +1,15 @@
-// Seleksi elemen tombol edit dan simpan
 const editButton = document.querySelector('#editButton');
 const checkIconContainer = document.querySelector('.checkIconContainer');
 const saveEditProfile = document.querySelector('.saveEditProfile');
 
-// Event listener untuk tombol edit
-editButton.addEventListener('click', function() {
+editButton.addEventListener('click', function () {
     toggleEditMode();
 });
 
-// Event listener untuk tombol save/check
-saveEditProfile.addEventListener('click', function() {
+saveEditProfile.addEventListener('click', function () {
     saveProfileData();
 });
 
-// Fungsi untuk toggle edit mode
 function toggleEditMode() {
     const elements = [
         { display: 'usernameDisplay', input: 'usernameInput' },
@@ -26,7 +22,6 @@ function toggleEditMode() {
         const displayElem = document.getElementById(element.display);
         const inputElem = document.getElementById(element.input);
 
-        // Toggle tampilan elemen
         if (displayElem.style.display === 'none') {
             displayElem.style.display = 'block';
             inputElem.style.display = 'none';
@@ -36,22 +31,19 @@ function toggleEditMode() {
         }
     });
 
-    // Toggle ikon edit dan close (X)
+
     if (editButton.classList.contains('fa-edit')) {
         editButton.classList.remove('fa-edit');
         editButton.classList.add('fa-times');
-        checkIconContainer.style.display = 'block'; // Tampilkan ikon check
+        checkIconContainer.style.display = 'block';
     } else {
         editButton.classList.remove('fa-times');
         editButton.classList.add('fa-edit');
-        checkIconContainer.style.display = 'none'; // Sembunyikan ikon check
+        checkIconContainer.style.display = 'none';
     }
 }
 
-// Fungsi untuk menyimpan data profil
-// Fungsi untuk menyimpan data profil
 function saveProfileData() {
-    // Ambil data dari input field
     const updatedData = {
         username: document.getElementById('usernameInput').value,
         email: document.getElementById('emailInput').value,
@@ -59,38 +51,59 @@ function saveProfileData() {
         address: document.getElementById('addressInput').value
     };
 
-    // Kirim data ke server menggunakan fetch API (AJAX)
     fetch('/profile/update', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
         body: JSON.stringify(updatedData)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');  
-        }
-        return response.json();  
-    })
-    .then(data => {
-        console.log(data);  
-        if (data.success) { 
-            document.getElementById('usernameDisplay').innerText = updatedData.username;
-            document.getElementById('emailDisplay').innerText = updatedData.email;
-            document.getElementById('phoneDisplay').innerText = updatedData.phone;
-            document.getElementById('addressDisplay').innerText = updatedData.address;
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                document.getElementById('usernameDisplay').innerText = updatedData.username;
+                document.getElementById('emailDisplay').innerText    = updatedData.email;
+                document.getElementById('phoneDisplay').innerText    = updatedData.phone;
+                document.getElementById('addressDisplay').innerText  = updatedData.address;
+                toggleEditMode(); 
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: data.message, 
+                    showConfirmButton: true,
+                    customClass: {
+                        popup: 'custom-swal-popup',
+                        confirmButton: 'custom-swal-confirm-button',
+                    },
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<ul>' + Object.values(data.errors).map(errors => `<li>${errors[0]}</li>`).join('') + '</ul>',
+                    showConfirmButton: true,
+                    customClass: {
+                        popup: 'custom-swal-popup',
+                        confirmButton: 'custom-swal-confirm-button',
+                    },
+                });
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: error.message,
+                showConfirmButton: true,
+                customClass: {
+                    popup: 'custom-swal-popup',
+                    confirmButton: 'custom-swal-confirm-button',
+                },
+            });
 
-            toggleEditMode();  
-            alert('Data berhasil diperbarui!');
-        } else {
-            alert('Gagal menyimpan data: ' + data.message);  
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Terjadi kesalahan, coba lagi');  
-    });
+        });
 }
-
