@@ -1,6 +1,10 @@
 const editButton = document.querySelector('#editButton');
 const checkIconContainer = document.querySelector('.checkIconContainer');
 const saveEditProfile = document.querySelector('.saveEditProfile');
+const profileImageContainer = document.getElementById('profileImageContainer');
+const profileImageInput = document.getElementById('profileImageInput');
+
+profileImageInput.disabled = true;
 
 editButton.addEventListener('click', function () {
     toggleEditMode();
@@ -8,6 +12,18 @@ editButton.addEventListener('click', function () {
 
 saveEditProfile.addEventListener('click', function () {
     saveProfileData();
+});
+
+profileImageContainer.addEventListener('mouseover', function () {
+    if (!profileImageInput.disabled) {
+        profileImageInput.style.display = 'block';
+    }
+});
+
+profileImageContainer.addEventListener('mouseleave', function () {
+    if (!profileImageInput.files.length) {  
+        profileImageInput.style.display = 'none';
+    }
 });
 
 function toggleEditMode() {
@@ -31,15 +47,20 @@ function toggleEditMode() {
         }
     });
 
-
     if (editButton.classList.contains('fa-edit')) {
         editButton.classList.remove('fa-edit');
         editButton.classList.add('fa-times');
         checkIconContainer.style.display = 'block';
+
+        profileImageInput.disabled = false;
     } else {
         editButton.classList.remove('fa-times');
         editButton.classList.add('fa-edit');
         checkIconContainer.style.display = 'none';
+
+
+        profileImageInput.disabled = true;
+        profileImageInput.style.display = 'none';  
     }
 }
 
@@ -48,62 +69,67 @@ function saveProfileData() {
         username: document.getElementById('usernameInput').value,
         email: document.getElementById('emailInput').value,
         phone: document.getElementById('phoneInput').value,
-        address: document.getElementById('addressInput').value
+        address: document.getElementById('addressInput').value,
+        image: profileImageInput.files[0] 
     };
+
+    const formData = new FormData();
+    for (let key in updatedData) {
+        formData.append(key, updatedData[key]);
+    }
 
     fetch('/profile/update', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
-        body: JSON.stringify(updatedData)
+        body: formData
     })
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                document.getElementById('usernameDisplay').innerText = updatedData.username;
-                document.getElementById('emailDisplay').innerText    = updatedData.email;
-                document.getElementById('phoneDisplay').innerText    = updatedData.phone;
-                document.getElementById('addressDisplay').innerText  = updatedData.address;
-                toggleEditMode(); 
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: data.message, 
-                    showConfirmButton: true,
-                    customClass: {
-                        popup: 'custom-swal-popup',
-                        confirmButton: 'custom-swal-confirm-button',
-                    },
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                    footer: '<ul>' + Object.values(data.errors).map(errors => `<li>${errors[0]}</li>`).join('') + '</ul>',
-                    showConfirmButton: true,
-                    customClass: {
-                        popup: 'custom-swal-popup',
-                        confirmButton: 'custom-swal-confirm-button',
-                    },
-                });
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('usernameDisplay').innerText = updatedData.username;
+            document.getElementById('emailDisplay').innerText = updatedData.email;
+            document.getElementById('phoneDisplay').innerText = updatedData.phone;
+            document.getElementById('addressDisplay').innerText = updatedData.address;
+            if (updatedData.image) {
+                document.getElementById('profileImage').src = URL.createObjectURL(updatedData.image);
             }
-        })
-        .catch(error => {
+            toggleEditMode();
             Swal.fire({
-                icon: 'error',
-                title: 'Error!',
-                text: error.message,
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
                 showConfirmButton: true,
                 customClass: {
                     popup: 'custom-swal-popup',
                     confirmButton: 'custom-swal-confirm-button',
                 },
             });
-
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<ul>' + Object.values(data.errors).map(errors => `<li>${errors[0]}</li>`).join('') + '</ul>',
+                showConfirmButton: true,
+                customClass: {
+                    popup: 'custom-swal-popup',
+                    confirmButton: 'custom-swal-confirm-button',
+                },
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: error.message,
+            showConfirmButton: true,
+            customClass: {
+                popup: 'custom-swal-popup',
+                confirmButton: 'custom-swal-confirm-button',
+            },
         });
+    });
 }
