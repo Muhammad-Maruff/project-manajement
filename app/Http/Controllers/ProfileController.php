@@ -19,24 +19,27 @@ class ProfileController extends Controller
         $user = Auth::user();
         
         try {
-       
             $validateData = $request->validate([
                 'username' => 'required|unique:users,username,' . $user->id . '|max:255',
                 'email'    => 'required|unique:users,email,' . $user->id . '|max:255|email',
                 'phone'    => 'required|string|max:20',
                 'address'  => 'required|string|max:255',
                 'image'    => 'nullable|max:2048', 
-            ]);  
-
+            ]);
+    
             if ($request->hasFile('image')) {
                 if ($user->image && file_exists(public_path('storage/images/' . $user->image))) {
                     unlink(public_path('storage/images/' . $user->image));
                 }
-                $originalName = $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('images', $originalName, 'public');
-                $user->image = $originalName;
+    
+                $image = $request->file('image');
+                $uniqueName = time() . '_' . $image->getClientOriginalName();
+    
+                $image->storeAs('images', $uniqueName, 'public');
+                $user->image = $uniqueName;
             }
-
+    
+            // Update data pengguna
             $user->username = $validateData['username'];
             $user->email    = $validateData['email'];
             $user->phone    = $validateData['phone'];
@@ -55,6 +58,7 @@ class ProfileController extends Controller
             ], 422);
         }
     }
+    
     
     
     

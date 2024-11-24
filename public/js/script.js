@@ -3,6 +3,8 @@ const checkIconContainer = document.querySelector('.checkIconContainer');
 const saveEditProfile = document.querySelector('.saveEditProfile');
 const profileImageContainer = document.getElementById('profileImageContainer');
 const profileImageInput = document.getElementById('profileImageInput');
+const editImageButton = document.getElementById('editImageButton');
+const profileImage = document.getElementById('profileImage');  
 
 profileImageInput.disabled = true;
 
@@ -23,6 +25,20 @@ profileImageContainer.addEventListener('mouseover', function () {
 profileImageContainer.addEventListener('mouseleave', function () {
     if (!profileImageInput.files.length) {  
         profileImageInput.style.display = 'none';
+    }
+});
+
+
+profileImageInput.addEventListener('change', function () {
+    const file = profileImageInput.files[0];  
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            profileImage.src = e.target.result;  
+        };
+
+        reader.readAsDataURL(file); 
     }
 });
 
@@ -53,14 +69,21 @@ function toggleEditMode() {
         checkIconContainer.style.display = 'block';
 
         profileImageInput.disabled = false;
+        profileImageContainer.classList.add('edit-mode'); 
     } else {
         editButton.classList.remove('fa-times');
         editButton.classList.add('fa-edit');
         checkIconContainer.style.display = 'none';
 
-
         profileImageInput.disabled = true;
         profileImageInput.style.display = 'none';  
+        profileImageContainer.classList.remove('edit-mode');  
+    }
+}
+
+function triggerFileInput() {
+    if (!profileImageInput.disabled) {
+        profileImageInput.click();  
     }
 }
 
