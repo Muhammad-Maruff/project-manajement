@@ -23,7 +23,7 @@ body .container {
 }
 
 body.body-image {
-    background-image: url('../images/background.jpg');
+    background-image: url('/images/background.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -207,8 +207,9 @@ body.body-image {
     font-size: 30px;
 }
 
-.fa-check:hover {
+.saveEditProfile:hover {
     cursor: pointer;
+    color: #62c659;
 }
 
 .form-group label {
@@ -285,6 +286,7 @@ input {
     border: none;
     border-bottom: 1px solid rgb(179, 179, 179);
 }
+
 
 
 

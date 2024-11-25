@@ -22,7 +22,8 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{asset('AdminLTE-3/plugins/daterangepicker/daterangepicker.css')}}">
    <!-- SweetAlert2 -->
-     <link rel="stylesheet" href=" {{asset('AdminLTE-3/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+  <link rel="stylesheet" href=" {{asset('AdminLTE-3/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -91,7 +92,9 @@
 <script src="{{asset('AdminLTE-3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('AdminLTE-3/dist/js/adminlte.js')}}"></script>
-<script src="{{asset('js/script.js')}}"></script>
+
+<script src="{{ mix('js/app.js') }}"></script>
+
 
 <script src="{{asset('AdminLTE-3/dist/js/pages/dashboard.js')}}"></script>
 
