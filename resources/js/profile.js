@@ -45,9 +45,9 @@ profileImageInput.addEventListener('change', function () {
 function toggleEditMode() {
     const elements = [
         { display: 'usernameDisplay', input: 'usernameInput' },
-        { display: 'emailDisplay', input: 'emailInput' },
-        { display: 'phoneDisplay', input: 'phoneInput' },
-        { display: 'addressDisplay', input: 'addressInput' }
+        { display: 'emailDisplay',    input: 'emailInput' },
+        { display: 'phoneDisplay',    input: 'phoneInput' },
+        { display: 'addressDisplay',  input: 'addressInput' }
     ];
 
     elements.forEach(element => {
@@ -56,10 +56,10 @@ function toggleEditMode() {
 
         if (displayElem.style.display === 'none') {
             displayElem.style.display = 'block';
-            inputElem.style.display = 'none';
+            inputElem.style.display   = 'none';
         } else {
             displayElem.style.display = 'none';
-            inputElem.style.display = 'block';
+            inputElem.style.display   = 'block';
         }
     });
 
@@ -75,8 +75,8 @@ function toggleEditMode() {
         editButton.classList.add('fa-edit');
         checkIconContainer.style.display = 'none';
 
-        profileImageInput.disabled = true;
-        profileImageInput.style.display = 'none';  
+        profileImageInput.disabled       = true;
+        profileImageInput.style.display  = 'none';  
         profileImageContainer.classList.remove('edit-mode');  
     }
 }
@@ -89,11 +89,11 @@ function triggerFileInput() {
 
 function saveProfileData() {
     const updatedData = {
-        username: document.getElementById('usernameInput').value,
-        email: document.getElementById('emailInput').value,
-        phone: document.getElementById('phoneInput').value,
-        address: document.getElementById('addressInput').value,
-        image: profileImageInput.files[0] 
+        username  : document.getElementById('usernameInput').value,
+        email     : document.getElementById('emailInput').value,
+        phone     : document.getElementById('phoneInput').value,
+        address   : document.getElementById('addressInput').value,
+        image     : profileImageInput.files[0] 
     };
 
     const formData = new FormData();
@@ -112,9 +112,9 @@ function saveProfileData() {
     .then(data => {
         if (data.success) {
             document.getElementById('usernameDisplay').innerText = updatedData.username;
-            document.getElementById('emailDisplay').innerText = updatedData.email;
-            document.getElementById('phoneDisplay').innerText = updatedData.phone;
-            document.getElementById('addressDisplay').innerText = updatedData.address;
+            document.getElementById('emailDisplay').innerText    = updatedData.email;
+            document.getElementById('phoneDisplay').innerText    = updatedData.phone;
+            document.getElementById('addressDisplay').innerText  = updatedData.address;
             if (updatedData.image) {
                 document.getElementById('profileImage').src = URL.createObjectURL(updatedData.image);
             }

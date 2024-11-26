@@ -11,10 +11,9 @@
         <div class="card-header">
             <div class="user-panel mt-3 mb-3 d-flex">
                 <div class="image" id="profileImageContainer">
-                    <!-- Gambar Profil -->
+        
                     <img src="{{ Auth()->user()->image ? asset('storage/images/'.Auth()->user()->image) : asset('images/profile.jpg') }}" class="img-circle profile-image" alt="User Image" id="profileImage">
                     
-                    <!-- Tombol Edit Gambar (Ikon Kamera) -->
                     <button id="editImageButton" class="btn btn-sm" onclick="triggerFileInput()">
                         <i class="fas fa-camera"></i> <!-- Ikon Kamera -->
                     </button>
