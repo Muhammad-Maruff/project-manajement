@@ -314,6 +314,32 @@ input {
     100% { transform: rotate(360deg); }
 }
 
+.swal2-title-success {
+    color: #2AD641 !important;
+    font-size: 24px;
+}
+
+.swal2-title-failed {
+    color: #FF0000 !important;
+    font-size: 24px;
+}
+
+.custom-swal-confirm-button-success {
+    width: 130px;
+    background-color: #47A43F !important;
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+.custom-swal-confirm-button-error {
+    width: 130px;
+    background-color: #DA1F1F !important;
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+
+
 
 
 

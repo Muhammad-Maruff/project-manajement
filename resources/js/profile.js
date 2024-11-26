@@ -124,25 +124,31 @@ function saveProfileData() {
             }
             toggleEditMode();
             Swal.fire({
-                icon: 'success',
-                title: 'Success!',
+                imageUrl: '/images/Add files-bro.png',
+                imageWidth: 300,
+                imageHeight: 300,
+                title: 'SUCCESS !',
                 text: data.message,
                 showConfirmButton: true,
                 customClass: {
                     popup: 'custom-swal-popup',
-                    confirmButton: 'custom-swal-confirm-button',
-                },
+                    confirmButton: 'custom-swal-confirm-button-success',
+                    title: 'swal2-title-success',
+                }
             });
         } else {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
+                imageUrl: '/images/Questions-cuate.png',
+                imageWidth: 300,
+                imageHeight: 300,
+                title: 'FAILED !',
+                text: 'Profile update failed. Please try again.',
                 footer: '<ul>' + Object.values(data.errors).map(errors => `<li>${errors[0]}</li>`).join('') + '</ul>',
                 showConfirmButton: true,
                 customClass: {
                     popup: 'custom-swal-popup',
-                    confirmButton: 'custom-swal-confirm-button',
+                    confirmButton: 'custom-swal-confirm-button-error',
+                    title: 'swal2-title-failed',
                 },
             });
         }
@@ -155,6 +161,7 @@ function saveProfileData() {
             title: 'Error!',
             text: error.message,
             showConfirmButton: true,
+            color: '#2AD641',
             customClass: {
                 popup: 'custom-swal-popup',
                 confirmButton: 'custom-swal-confirm-button',
