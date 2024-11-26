@@ -3,6 +3,12 @@
 
 @section('content')
 
+<!-- Loading Spinner -->
+<div id="loadingSpinner" style="display:none;">
+    <div class="spinner"></div> 
+</div>
+
+
 <div class="row profile-container">
     <div class="card profile-card">
         <button id="editProfileButton" class="editProfileButton">

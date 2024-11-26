@@ -5,6 +5,7 @@ const profileImageContainer = document.getElementById('profileImageContainer');
 const profileImageInput = document.getElementById('profileImageInput');
 const editImageButton = document.getElementById('editImageButton');
 const profileImage = document.getElementById('profileImage');  
+const loading = document.getElementById('loadingSpinner');
 
 profileImageInput.disabled = true;
 
@@ -27,7 +28,6 @@ profileImageContainer.addEventListener('mouseleave', function () {
         profileImageInput.style.display = 'none';
     }
 });
-
 
 profileImageInput.addEventListener('change', function () {
     const file = profileImageInput.files[0];  
@@ -101,6 +101,8 @@ function saveProfileData() {
         formData.append(key, updatedData[key]);
     }
 
+    loading.style.display = 'flex';
+
     fetch('/profile/update', {
         method: 'POST',
         headers: {
@@ -110,6 +112,8 @@ function saveProfileData() {
     })
     .then(response => response.json())
     .then(data => {
+        loading.style.display = 'none';
+
         if (data.success) {
             document.getElementById('usernameDisplay').innerText = updatedData.username;
             document.getElementById('emailDisplay').innerText    = updatedData.email;
@@ -144,6 +148,8 @@ function saveProfileData() {
         }
     })
     .catch(error => {
+        loading.style.display = 'none';
+
         Swal.fire({
             icon: 'error',
             title: 'Error!',

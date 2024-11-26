@@ -2216,6 +2216,7 @@ var profileImageContainer = document.getElementById('profileImageContainer');
 var profileImageInput = document.getElementById('profileImageInput');
 var editImageButton = document.getElementById('editImageButton');
 var profileImage = document.getElementById('profileImage');
+var loading = document.getElementById('loadingSpinner');
 profileImageInput.disabled = true;
 editButton.addEventListener('click', function () {
   toggleEditMode();
@@ -2300,6 +2301,7 @@ function saveProfileData() {
   for (var key in updatedData) {
     formData.append(key, updatedData[key]);
   }
+  loading.style.display = 'flex';
   fetch('/profile/update', {
     method: 'POST',
     headers: {
@@ -2309,6 +2311,7 @@ function saveProfileData() {
   }).then(function (response) {
     return response.json();
   }).then(function (data) {
+    loading.style.display = 'none';
     if (data.success) {
       document.getElementById('usernameDisplay').innerText = updatedData.username;
       document.getElementById('emailDisplay').innerText = updatedData.email;
@@ -2344,6 +2347,7 @@ function saveProfileData() {
       });
     }
   })["catch"](function (error) {
+    loading.style.display = 'none';
     Swal.fire({
       icon: 'error',
       title: 'Error!',
